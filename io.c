@@ -14,14 +14,16 @@ int load_csv_file(char* filename) {
 
 
     if (fgets(row_counter, sizeof (row_counter), file) !=NULL) {
-        printf("Header row called: %s\n", row_counter);
+        printf("Header row ignored successfully.\n");
     }
 
-    if (fgets(row_counter, sizeof (row_counter), file)!=NULL){
-        printf("next row test: %s\n", row_counter);
+    while (fgets(row_counter, sizeof(row_counter), file) !=NULL){
+        count++; //increase row count by 1
     }
+
+    printf("Total number of rows found: %d rows of data.\n", count);
 
 fclose(file);
 
-    return 0;
+    return count;
 }
