@@ -1,3 +1,5 @@
+#define waveform_h
+
 typedef struct {
 
     double timestamp;
