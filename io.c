@@ -6,10 +6,22 @@ int load_csv_file(char* filename) {
 
     if (file == NULL) {
         printf("Error: Could not open file\n");
-        return 1;
+        return 1; //error code if file not found
     }
 
-    printf("Success file was found\n");
+    char row_counter[1024];
+    int count = 0;
 
-    fclose(file);
+
+    if (fgets(row_counter, sizeof (row_counter), file) !=NULL) {
+        printf("Header row called: %s\n", row_counter);
+    }
+
+    if (fgets(row_counter, sizeof (row_counter), file)!=NULL){
+        printf("next row test: %s\n", row_counter);
+    }
+
+fclose(file);
+
+    return 0;
 }
