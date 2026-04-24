@@ -1,3 +1,4 @@
+#ifndef waveform_h
 #define waveform_h
 
 typedef struct {
@@ -11,3 +12,5 @@ typedef struct {
     double power_factor;
     double thd_percent;
 } WaveformSample;
+
+#endif
