@@ -13,4 +13,6 @@ typedef struct {
     double thd_percent;
 } WaveformSample;
 
+double calculate_rms_voltage(WaveformSample *data, int rows);
+
 #endif
