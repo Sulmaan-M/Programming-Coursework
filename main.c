@@ -4,12 +4,20 @@
 
 int main() {
 
-    int final_row_count = 0;
+    int row = 0;
     char* filename = "power_quality_log.csv";
 
-    WaveformSample* data_array = load_csv_file(filename, &final_row_count);
+    WaveformSample* data = load_csv_file(filename, &row);
 
-        free(data_array);
+        printf ("Row test\n");
+
+        printf("Row 0 | time %lf | phase A: %lf\n", data[0].timestamp, data[0].phase_A_voltage);
+        printf("Row 1 | time %lf | phase A: %lf\n", data[1].timestamp, data[1].phase_A_voltage);
+        printf("Row 2 | time %lf | phase A: %lf\n", data[2].timestamp, data[2].phase_A_voltage);
+
+
+           free(data);
+
 
     return 0;
 }
