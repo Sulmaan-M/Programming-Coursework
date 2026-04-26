@@ -10,8 +10,10 @@ int main() {
     WaveformSample* data = load_csv_file(filename, &row);
 
         double rms_voltage = calculate_rms_voltage(data, row);
+        double peak_to_peak = calculate_peak_to_peak(data, row);
 
         printf("Phase A RMS Voltage: %.2lf V\n", rms_voltage);
+        printf("phase A Peak-to-Peak %.2lf\n", peak_to_peak);
 
     free(data);
 
