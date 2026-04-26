@@ -18,10 +18,7 @@ WaveformSample* load_csv_file(char* filename, int* total_rowcount) {
     }
     *total_rowcount = count;
 
-    size_t row_size = sizeof(WaveformSample);
-    size_t total_memory = count * row_size;
-    WaveformSample *memory_allocation = (WaveformSample*) malloc (total_memory);
-
+    WaveformSample *memory_allocation = (WaveformSample*) malloc(count * sizeof(WaveformSample));
 
     if (memory_allocation == NULL) {
         printf("Error: memory not allocated\n");
