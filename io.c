@@ -29,11 +29,25 @@ WaveformSample* load_csv_file(char* filename, int* total_rowcount) {
         return NULL;
     }
 
-    printf("Total number of rows found: %d rows of data.\n", count);
-    printf("Size of one WaveformSample: %zu bytes\n", row_size);
-    printf("Total memory to allocate: %zu bytes\n", total_memory);
+rewind(file);
 
-    fclose(file);
+    fgets(row_counter, sizeof(row_counter), file);
+
+    for (int i = 0; i < count; i++) {
+        if (fgets(row_counter, sizeof(row_counter), file) != NULL) {
+
+            sscanf(row_counter, "%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf",
+                   &memory_allocation[i].timestamp,
+                   &memory_allocation[i].phase_A_voltage,
+                   &memory_allocation[i].phase_B_voltage,
+                   &memory_allocation[i].phase_C_voltage,
+                   &memory_allocation[i].line_current,
+                   &memory_allocation[i].frequency,
+                   &memory_allocation[i].power_factor,
+                   &memory_allocation[i].thd_percent);
+        }
+    }
+        fclose(file);
 
     return memory_allocation;
 }
