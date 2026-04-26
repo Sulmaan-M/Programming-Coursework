@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <stdlib.h> // FIX: This is needed for free()
+#include <stdlib.h>
 #include "io.h"
 
 int main() {
@@ -9,15 +9,12 @@ int main() {
 
     WaveformSample* data = load_csv_file(filename, &row);
 
-        printf ("Row test\n");
+        double rms_voltage = calculate_rms_voltage(data, row);
 
-        printf("Row 0 | time %lf | phase A: %lf\n", data[0].timestamp, data[0].phase_A_voltage);
-        printf("Row 1 | time %lf | phase A: %lf\n", data[1].timestamp, data[1].phase_A_voltage);
-        printf("Row 2 | time %lf | phase A: %lf\n", data[2].timestamp, data[2].phase_A_voltage);
+        printf("Phase A RMS Voltage: %.2lf V\n", rms_voltage);
 
-
-           free(data);
-
+    free(data);
 
     return 0;
+
 }
