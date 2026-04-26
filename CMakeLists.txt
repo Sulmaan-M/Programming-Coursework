@@ -3,4 +3,4 @@ project(Programming_Coursework C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(Programming_Coursework main.c io.c)
+add_executable(Programming_Coursework main.c io.c waveform.c)
