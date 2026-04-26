@@ -15,4 +15,6 @@ typedef struct {
 
 double calculate_rms_voltage(WaveformSample *data, int rows);
 
+double calculate_peak_to_peak(WaveformSample *data, int rows);
+
 #endif
