@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "waveform.h"
 
-WaveformSample* load_csv_file(char* filename, int* total_rowcount) {
+WaveformSample* load_csv_file(const char* filename, int* total_rowcount) {
     FILE *file = fopen(filename, "r");
     if (file == NULL) {
         printf("Error: Could not open file\n");
@@ -47,4 +47,31 @@ rewind(file);
         fclose(file);
 
     return memory_allocation;
+}
+
+void export_results_to_file(const char* filename, double* rms, double* ptp, double* dc, int* clip) {
+    FILE *file = fopen(filename, "w");
+    if (file == NULL) {
+        printf("Error: Could not create the save file.\n");
+        return;
+    }
+
+    char phases[3] = {'A', 'B', 'C'};
+    fprintf(file, "3-PHASE POWER QUALITY ANALYSIS\n\n");
+
+    for (int i = 0; i < 3; i++) {
+        fprintf(file, "PHASE %c Results:\n", phases[i]);
+        fprintf(file, "  RMS Voltage      : %.2lf V\n", rms[i]);
+        fprintf(file, "  Peak-to-Peak     : %.2lf V\n", ptp[i]);
+        fprintf(file, "  DC Offset        : %.2lf V\n", dc[i]);
+        fprintf(file, "  Clipped Samples  : %d\n", clip[i]);
+
+        if (check_tolerance(rms[i]) == 1) {
+            fprintf(file, "PASS (Within 10%% of 230V)\n\n");
+        } else {
+            fprintf(file, "FAIL (Out of bounds)\n\n");
+        }
+    }
+    fclose(file);
+    printf("SUCCESS: Results saved to %s\n", filename);
 }
