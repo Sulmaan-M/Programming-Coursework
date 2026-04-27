@@ -73,12 +73,9 @@ void detect_clipping(WaveformSample *data, int rows, int *results) {
     }
 }
 
-    void check_tolerance(double rms_voltage) {
-        if (rms_voltage >= 207.0 && rms_voltage <= 253.0) {
-
-            printf("PASS (Within 10%% of 230V)");
-        }
-        else {
-            printf("FAIL (Out of tolerance)");
-        }
+    int check_tolerance(double rms_voltage) {
+    if (rms_voltage >= 207.0 && rms_voltage <= 253.0) {
+        return 1;
     }
+    return 0;
+}
