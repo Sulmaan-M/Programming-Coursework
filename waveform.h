@@ -21,4 +21,6 @@ void calculate_dc_offset(WaveformSample *data, int rows, double *results);
 
 void detect_clipping(WaveformSample *data, int rows, int *results);
 
+void check_tolerance(double rms_voltage);
+
 #endif
