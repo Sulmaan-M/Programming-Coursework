@@ -9,27 +9,27 @@
 
         WaveformSample* data = load_csv_file(filename, &row);
 
-            double rms_voltage = calculate_rms_voltage(data, row);
-            double peak_to_peak = calculate_peak_to_peak(data, row);
-            double dc_offset = calculate_dc_offset(data, row);
-            int clipping_detection = detect_clipping(data, row);
-            int tolerance = check_tolerance(rms_voltage);
+        double rms_voltage[3];
+        double peak_to_peak[3];
+        double dc_offset[3];
+        int clipped_results[3];
 
+        calculate_rms_voltage(data, row, rms_voltage);
+        calculate_peak_to_peak(data, row, peak_to_peak);
+        calculate_dc_offset(data, row, dc_offset);
+        detect_clipping(data, row, clipped_results);
 
+        char phase_voltages[3] = {'A', 'B', 'C'};
 
-            printf("Phase A RMS Voltage: %.2lf V\n", rms_voltage);
-            printf("phase A Peak-to-Peak %.2lf\n", peak_to_peak);
-            printf("Phase A DC Offet: %.2lf\n",dc_offset);
-            printf("Phase A Clipping detection: %d\n", clipping_detection);
+        for (int i = 0; i < 3; i++) {
+            printf("PHASE %c Results:\n", phase_voltages[i]);
+            printf("  RMS Voltage      : %.2lf V\n", rms_voltage[i]);
+            printf("  Peak-to-Peak     : %.2lf V\n", peak_to_peak[i]);
+            printf("  DC Offset        : %.2lf V\n", dc_offset[i]);
+            printf("  Clipped Samples  : %d\n", clipped_results[i]);
+            check_tolerance(rms_voltage[i]);
+        }
 
-            if (tolerance == 1){
-
-                printf("Phase A is compliant\n");
-            }
-
-            else {
-                printf("Phase A is out of bounds\n");
-            }
 
         free(data);
 
