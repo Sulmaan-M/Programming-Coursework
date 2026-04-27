@@ -11,9 +11,11 @@ int main() {
 
         double rms_voltage = calculate_rms_voltage(data, row);
         double peak_to_peak = calculate_peak_to_peak(data, row);
+        int clipping_detection = detect_clipping(data, row);
 
         printf("Phase A RMS Voltage: %.2lf V\n", rms_voltage);
         printf("phase A Peak-to-Peak %.2lf\n", peak_to_peak);
+        printf("Phase A Clipping detection: %d\n", clipping_detection);
 
     free(data);
 

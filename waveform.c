@@ -21,7 +21,7 @@ double calculate_peak_to_peak (WaveformSample *data, int rows) {
     double max_voltage = data [0].phase_A_voltage;
     double min_voltage = data [0].phase_A_voltage;
 
-    for (int i = 1; i < rows; i++){
+    for (int i = 0; i < rows; i++){
 
         double current_voltage = data [i].phase_A_voltage;
 
@@ -30,9 +30,24 @@ double calculate_peak_to_peak (WaveformSample *data, int rows) {
 
         }
 
-        if current_voltage < min_voltage) {
+        if (current_voltage < min_voltage) {
            min_voltage = current_voltage;
 }
     }
          return (max_voltage - min_voltage);
+}
+
+int detect_clipping(WaveformSample *data, int rows) {
+    int count = 0;
+
+    for (int i = 0; i < rows; i++) {
+        if (fabs(data[i].phase_A_voltage)>=324.9) {
+            count++;
+
+        }
+
+    }
+
+    return count;
+
 }
