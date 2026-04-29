@@ -61,12 +61,12 @@ void export_results_to_file(const char* filename, double* rms, double* ptp, doub
 
     for (int i = 0; i < 3; i++) {
         fprintf(file, "PHASE %c Results:\n", phases[i]);
-        fprintf(file, "  RMS Voltage      : %.2lf V\n", rms[i]);
-        fprintf(file, "  Peak-to-Peak     : %.2lf V\n", ptp[i]);
-        fprintf(file, "  DC Offset        : %.2lf V\n", dc[i]);
-        fprintf(file, "  Clipped Samples  : %d\n", clip[i]);
+        fprintf(file, "  RMS Voltage      : %.2lf V\n", rms);
+        fprintf(file, "  Peak-to-Peak     : %.2lf V\n", ptp);
+        fprintf(file, "  DC Offset        : %.2lf V\n", dc);
+        fprintf(file, "  Clipped Samples  : %d\n", clip);
 
-        if (check_tolerance(rms[i]) == 1) {
+        if (check_tolerance(rms) == 1) {
             fprintf(file, "PASS (Within 10%% of 230V)\n\n");
         } else {
             fprintf(file, "FAIL (Out of bounds)\n\n");
